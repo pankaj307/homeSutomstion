@@ -3,40 +3,6 @@ from consrant import right_lamp_state
 from pinSetup import right_lamp
 
 
-def get_http():
-   return """
-<!DOCTYPE html>
-<html>
-   <head>
-       <title>ESP8266 Web Server</title>
-       <meta name="viewport" content="width=device-width, initial-scale=1" />
-       <link rel="icon" href="data:," />
-       <style>
-           body {
-           background-color: Moccasin;
-           }
-           h1 {
-           color: SaddleBrown;
-           }
-           h2 {
-           color: Olive;
-           }
-       </style>
-   </head>
-   <body>
-       <center>
-           <h1>ESP8266 Web Server</h1>
-           <h2>LED status: <!--led_status--></h2>
-           <form methon="GET" action="">
-               <p><input id="led_on" type="submit" name="led" value="On" /></p>
-               <p><input id="led_off" type="submit" name="led" value="Off" /></p>
-           </form>
-       </center>
-   </body>
-</html>
-"""
-
-
 def get_get_http():
    # add HTTP response headers
    return 'HTTP/1.1 200 OK\r\n' + \
@@ -53,10 +19,12 @@ def web_page():
 # extract url parameters from HTTP request
 def get_paras(get_str: str):
    para_dict = {}
-   q_pos = get_str.find('/?')
+   print(get_str)
+   q_pos = get_str.find('/')
+   print(q_pos)
    if q_pos > 0:
        http_pos = get_str.find('HTTP/')
-       para_list = get_str[q_pos + 2: http_pos - 1].split('//')
+       para_list = get_str[q_pos + 1: http_pos - 1].split('//')
        print("para_list",para_list)
        for para in para_list:
            para_tmp = para.split('=')
@@ -89,5 +57,3 @@ def get_state():
    return """{
        right_lamp: """ + right_lamp_state + """
    }"""
-
-
