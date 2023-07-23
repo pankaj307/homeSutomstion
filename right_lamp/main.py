@@ -1,6 +1,6 @@
 # webpage template
 from consrant import right_lamp_state
-from pinSetup import right_lamp
+from pinSetup import right_lamp1,right_lamp2,right_lamp3
 
 
 def get_get_http():
@@ -43,10 +43,14 @@ def router(paras: dict):
 
 def toggle_right_lamp(state):
    if state == "true":
-       right_lamp.value(1)
+       right_lamp1.value(1)
+       right_lamp2.value(1)
+       right_lamp3.value(1)
        right_lamp_state = "true"
    else:
-       right_lamp.value(0)
+       right_lamp1.value(0)
+       right_lamp2.value(0)
+       right_lamp3.value(0)
        right_lamp_state = "false"
    return """{
        right_lamp: """ + right_lamp_state + """
